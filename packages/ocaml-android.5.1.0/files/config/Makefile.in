@@ -5,9 +5,9 @@ MANDIR=%{prefix}%/android-sysroot/man
 MANEXT=1
 CAMLRUN=%{bin}%/ocamlrun
 CAMLYACC=%{bin}%/ocamlyacc
-RANLIB=%{conf-android:toolpref}%ranlib
-RANLIBCMD=%{conf-android:toolpref}%ranlib
-ARCMD=%{conf-android:toolpref}%ar
+RANLIB=%{conf-android:toolpref}%llvm-ranlib
+RANLIBCMD=%{conf-android:toolpref}%llvm-ranlib
+ARCMD=%{conf-android:toolpref}%llvm-ar
 HASHBANGSCRIPTS=true
 UNIX_OR_WIN32=unix
 UNIXLIB=unix
@@ -28,7 +28,7 @@ X11_LINK=not found
 TK_DEFS=
 TK_LINK=
 LIBBFD_LINK=
-BYTECC=%{conf-android:toolpref}%gcc %{conf-android:cflags}% -O2
+BYTECC=%{conf-android:clang}% %{conf-android:cflags}% -O2
 BYTECCCOMPOPTS=-fno-defer-pop -Wall -D_FILE_OFFSET_BITS=64 -D_REENTRANT
 BYTECCDBGCOMPOPTS=-g
 NAME_OBJ_FLAG=-o
@@ -44,8 +44,8 @@ SYSLIB=-l$(1)
 #ml let syslib x = "-l"^x;;
 
 ### How to build a static library
-MKLIB=%{conf-android:toolpref}%ar rc $(1) $(2); %{conf-android:toolpref}%ranlib $(1)
-#ml let mklib out files opts = Printf.sprintf "%{conf-android:toolpref}%ar rc %s %s %s; %{conf-android:toolpref}%ranlib %s" out opts files out;;
+MKLIB=%{conf-android:toolpref}%llvm-ar rc $(1) $(2); %{conf-android:toolpref}%llvm-ranlib $(1)
+#ml let mklib out files opts = Printf.sprintf "%{conf-android:toolpref}%llvm-ar rc %s %s %s; %{conf-android:toolpref}%llvm-ranlib %s" out opts files out;;
 ARCH=%{conf-android:arch}%
 MODEL=%{conf-android:subarch}%
 SYSTEM=%{conf-android:system}%
@@ -55,7 +55,7 @@ NATIVECCPROFOPTS=-Wall -D_FILE_OFFSET_BITS=64 -D_REENTRANT
 NATIVECCLINKOPTS=
 NATIVECCRPATH=-Wl,-rpath,
 NATIVECCLIBS= -lm  -ldl
-ASM=%{conf-android:toolpref}%as
+ASM=%{conf-android:toolpref}%llvm-as
 ASPP=$(BYTECC) -c
 ASPPPROFFLAGS=-DPROFILING
 PROFILING=prof

@@ -36,37 +36,9 @@ Pin some prerequisite packages that don't yet have fixes merged upstream:
     opam pin add ocamlbuild https://github.com/ocaml/ocamlbuild.git
     opam pin add topkg https://github.com/whitequark/topkg.git
 
-Configure the compiler for ARM:
-
-    ARCH=arm SUBARCH=armv7 SYSTEM=linux_eabi \
-      CCARCH=arm TOOLCHAIN=arm-linux-androideabi-4.9 \
-      TRIPLE=arm-linux-androideabi LEVEL=24 \
-      STLVER=4.9 STLARCH=armeabi \
-      opam install conf-android
-
 Alternatively, configure the compiler for AArch64:
 
-    ARCH=arm64 SUBARCH=arm64 SYSTEM=linux_eabi \
-      CCARCH=arm64 TOOLCHAIN=aarch64-linux-android-4.9 \
-      TRIPLE=aarch64-linux-android LEVEL=24 \
-      STLVER=4.9 STLARCH=arm64-v8a \
-      opam install conf-android
-
-Alternatively, configure the compiler for x86:
-
-    ARCH=i386 SUBARCH=default SYSTEM=linux_elf \
-      CCARCH=x86 TOOLCHAIN=x86-4.9 \
-      TRIPLE=i686-linux-android LEVEL=24 \
-      STLVER=4.9 STLARCH=x86 \
-      opam install conf-android
-
-Some options can be tweaked:
-
-  * `SUBARCH` (on ARM) specifies the ARM architecture version, e.g. `armv5te` or `armv7`;
-  * `SYSTEM` (on ARM) specifies the ABI: `linux_eabi` for soft-float and `linux_eabihf` for hard-float;
-  * `LEVEL` specifies the Android API level and defaults to latest available API.
-
-The options above (`ARCH`, `SUBARCH`, `SYSTEM`, `LEVEL`, `TOOLCHAIN` and `TRIPLE`) are recorded inside the `conf-android` package, so make sure to reinstall that package if you wish to switch to a different toolchain. Otherwise, it is not necessary to supply them while upgrading the `ocaml-android*` packages.
+    opam install conf-android
 
 If desired, request the compiler to be built with [flambda][] optimizers:
 

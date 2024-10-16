@@ -1,5 +1,5 @@
 opam-version: "1"
-maintainer: "whitequark@whitequark.org"
+maintainer: "julien.debon@routine.co"
 install: [
   ["mkdir" "-p" "%{prefix}%/android-ndk"]
   ["sh" "-c" "mv * %{prefix}%/android-ndk/"]
