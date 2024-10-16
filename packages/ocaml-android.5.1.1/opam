@@ -19,4 +19,4 @@ depends: [
 depopts: [
   "conf-flambda-android"
 ]
-available: [ (ocaml-version = "5.1.0" & arch = "x86_64") ]
+available: [ (ocaml-version = "5.1.1" & arch = "x86_64") ]
