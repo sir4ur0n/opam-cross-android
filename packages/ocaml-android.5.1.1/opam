@@ -1,9 +1,5 @@
 opam-version: "1"
 maintainer: "julien.debon@routine.co"
-patches: [
-  "patches/ocamlmklib.patch"
-  "patches/arm_const_islands.patch"
-]
 substs: ["android.conf" "config/Makefile"]
 build: [
   [make "world" "opt" "install"]
